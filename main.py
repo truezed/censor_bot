@@ -14,7 +14,13 @@ def echo_all(message):
     text = re.sub('[^A-Za-z0-9а-яА-я]+', '', message.text.lower())
     if any(word in text for word in ban_words):
         bot.delete_message(message_id=message.message_id, chat_id=message.chat.id)
-        bot.send_message(chat_id=message.chat.id, text=f"{message.from_user.first_name}, вы пишете гадости  .ю!")
+        bot.send_message(chat_id=message.chat.id, text=f"{message.from_user.first_name}, вы написали гадость!")
+
+
+@bot.message_handler(content_types=['voice', 'sticker'])
+def non_text_message_handler(message):
+    bot.send_message(chat_id=message.chat.id,
+                     text=f"{message.from_user.first_name}, получить пизды за неиспользование букв!")
 
 
 bot.infinity_polling()
