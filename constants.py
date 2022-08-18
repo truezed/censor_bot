@@ -15,3 +15,7 @@ PLUS_CREDITS_IMAGES = ['https://pbs.twimg.com/media/FBe1OxuWUAkuvnQ?format=jpg&n
                        'https://pbs.twimg.com/media/ExP4CyQWgAUqgm4.jpg',
                        'https://sun9-85.userapi.com/impg/FkMajScr2nuaSw-Yp3JsTNm9Jqnb2GnNAmid-w/ppQLlIM0l4c.jpg?size=320x213&quality=96&crop=48,0,1300,865&sign=617d27f5526027d08c19adb43b654ae2&type=album',
                        'https://assets.pikiran-rakyat.com/crop/0x0:0x0/750x500/photo/2021/12/05/3850065466.jpeg']
+
+
+ANEKDOT_API = "http://rzhunemogu.ru/RandJSON.aspx?CType=?"
+LIST_OF_PARAMS_ANEKDOT_API = [1, 11]

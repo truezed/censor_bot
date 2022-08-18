@@ -1,13 +1,20 @@
 import os
 import random
 import re
-import time
+import requests
 
 import telebot
-import telebot.types as types
 import constants as const
 
 bot = telebot.TeleBot(os.getenv("token"))
+
+
+@bot.message_handler(commands=["anek"])
+def get_anek(message):
+    r = requests.get(url="http://rzhunemogu.ru/RandJSON.aspx",
+                     params="CType="+str(random.choice(const.LIST_OF_PARAMS_ANEKDOT_API)))
+    p = re.search('"content":"([^"]+)"', r.text)
+    bot.send_message(message.chat.id, p.group(1))
 
 
 def extract_arg(arg):
@@ -29,7 +36,7 @@ def vote_public_enemy(message):
 
 def get_vote_text(name, yes, no):
     return "Объявить {name} врагом народа \n✅ Да, отправление смерть! {num1}/1 " \
-           "\n❌ Отрицательно, пощада {num2}/10305382"\
+           "\n❌ Отрицательно, пощада {num2}/10305382" \
         .format(name=name, num1=yes, num2=no)
 
 
