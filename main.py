@@ -14,14 +14,16 @@ def extract_arg(arg):
     return arg.split()[1:]
 
 
-@bot.message_handler(commands=["startvote"])
+@bot.message_handler(commands=["votekick"])
 def vote_public_enemy(message):
     args = extract_arg(message.text)
     if not args:
         bot.send_message(message.chat.id, "Укажите имя или тег гражданина")
+        return
     general_name = args[0]
     if general_name == "":
         bot.send_message(message.chat.id, "Укажите имя или тег гражданина")
+        return
     bot.send_message(message.chat.id, get_vote_text(general_name, 0, 0))
 
 
@@ -50,7 +52,7 @@ def echo_all(message):
                        reply_to_message_id=message.message_id)
 
 
-@bot.message_handler(content_types=['voice', 'sticker'])
+@bot.message_handler(content_types=['voice'])
 def non_text_message_handler(message):
     bot.reply_to(message, text=f"{message.from_user.first_name}, получить пизды за неиспользование букв!")
 
