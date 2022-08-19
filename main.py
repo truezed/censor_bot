@@ -3,7 +3,9 @@ import random
 import re
 import requests
 
+
 import telebot
+import telebot.types as types
 import constants as const
 
 bot = telebot.TeleBot(os.getenv("token"))
