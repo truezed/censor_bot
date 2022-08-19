@@ -1,7 +1,8 @@
 import os
 import random
 import re
-import time
+import requests
+
 
 import telebot
 import telebot.types as types
@@ -10,24 +11,34 @@ import constants as const
 bot = telebot.TeleBot(os.getenv("token"))
 
 
+@bot.message_handler(commands=["anek"])
+def get_anek(message):
+    r = requests.get(url="http://rzhunemogu.ru/RandJSON.aspx",
+                     params="CType="+str(random.choice(const.LIST_OF_PARAMS_ANEKDOT_API)))
+    p = re.search('"content":"([^"]+)"', r.text)
+    bot.send_message(message.chat.id, p.group(1))
+
+
 def extract_arg(arg):
     return arg.split()[1:]
 
 
-@bot.message_handler(commands=["startvote"])
+@bot.message_handler(commands=["votekick"])
 def vote_public_enemy(message):
     args = extract_arg(message.text)
     if not args:
         bot.send_message(message.chat.id, "Укажите имя или тег гражданина")
+        return
     general_name = args[0]
     if general_name == "":
         bot.send_message(message.chat.id, "Укажите имя или тег гражданина")
+        return
     bot.send_message(message.chat.id, get_vote_text(general_name, 0, 0))
 
 
 def get_vote_text(name, yes, no):
     return "Объявить {name} врагом народа \n✅ Да, отправление смерть! {num1}/1 " \
-           "\n❌ Отрицательно, пощада {num2}/10305382"\
+           "\n❌ Отрицательно, пощада {num2}/10305382" \
         .format(name=name, num1=yes, num2=no)
 
 
@@ -50,7 +61,7 @@ def echo_all(message):
                        reply_to_message_id=message.message_id)
 
 
-@bot.message_handler(content_types=['voice', 'sticker'])
+@bot.message_handler(content_types=['voice'])
 def non_text_message_handler(message):
     bot.reply_to(message, text=f"{message.from_user.first_name}, получить пизды за неиспользование букв!")
 
