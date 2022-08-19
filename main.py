@@ -13,10 +13,13 @@ bot = telebot.TeleBot(os.getenv("token"))
 
 @bot.message_handler(commands=["anek"])
 def get_anek(message):
+    if random.random() < 0.1:
+        bot.send_message(message.chat.id, const.ZWANZIG_ANEK)
+        return
     r = requests.get(url="http://rzhunemogu.ru/RandJSON.aspx",
                      params="CType="+str(random.choice(const.LIST_OF_PARAMS_ANEKDOT_API)))
-    p = re.search('"content":"([^"]+)"', r.text)
-    bot.send_message(message.chat.id, p.group(1))
+    p = re.search('"content":"([^}]+)"', r.text)
+    bot.send_message(message.chat.id, "#anek \n\n" + p.group(1))
 
 
 def extract_arg(arg):
