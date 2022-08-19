@@ -19,3 +19,8 @@ PLUS_CREDITS_IMAGES = ['https://pbs.twimg.com/media/FBe1OxuWUAkuvnQ?format=jpg&n
 
 ANEKDOT_API = "http://rzhunemogu.ru/RandJSON.aspx?CType=?"
 LIST_OF_PARAMS_ANEKDOT_API = [1, 11]
+ZWANZIG_ANEK = "ночью на дремучем хуторе стук в дверь: " \
+               "\n- ой, а кто там?" \
+               "\n - это мы, партизаны " \
+               "\n- ой, милочки, а сколько вас?" \
+               "\n- цвайцех"
