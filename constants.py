@@ -1,3 +1,5 @@
+import random
+
 BAN_WORDS = ["крым", "крим", "днр", "лнр", ]
 CHINA_REGEX = 'кита\S+'
 TAIWAN_REGEX = "тайван\S+"
@@ -17,8 +19,8 @@ PLUS_CREDITS_IMAGES = ['https://pbs.twimg.com/media/FBe1OxuWUAkuvnQ?format=jpg&n
                        'https://assets.pikiran-rakyat.com/crop/0x0:0x0/750x500/photo/2021/12/05/3850065466.jpeg']
 
 
-ANEKDOT_API = "http://rzhunemogu.ru/RandJSON.aspx?CType=?"
 LIST_OF_PARAMS_ANEKDOT_API = [1, 11]
+ANEKDOT_API = f"http://rzhunemogu.ru/RandJSON.aspx?CType={random.choice(LIST_OF_PARAMS_ANEKDOT_API)}"
 ZWANZIG_ANEK = "ночью на дремучем хуторе стук в дверь: " \
                "\n- ой, а кто там?" \
                "\n - это мы, партизаны " \
