@@ -1,3 +1,4 @@
+import json
 import os
 import random
 import re
@@ -11,13 +12,15 @@ bot = telebot.TeleBot(os.getenv("token"))
 
 @bot.message_handler(commands=["anek"])
 def get_anek(message):
-    if random.random() < 0.1:
+    if random.random() < 0.05:
         bot.send_message(message.chat.id, const.ZWANZIG_ANEK)
         return
-    r = requests.get(url="http://rzhunemogu.ru/RandJSON.aspx",
-                     params="CType="+str(random.choice(const.LIST_OF_PARAMS_ANEKDOT_API)))
-    p = re.search('"content":"([^}]+)"', r.text)
-    bot.send_message(message.chat.id, "#anek \n\n" + p.group(1))
+
+    anek = json.loads(requests.get(
+        url=const.ANEKDOT_API
+    ).text.replace("\r\n", "\\r\\n").replace("\t", "\\t").replace("\n", "\\n")).get("content", "Нет анека :(")
+
+    bot.send_message(message.chat.id, "#anek \n\n" + anek)
 
 
 def extract_arg(arg):
@@ -64,7 +67,7 @@ def echo_all(message):
 
 @bot.message_handler(content_types=['voice'])
 def non_text_message_handler(message):
-    bot.reply_to(message, text=f"{message.from_user.first_name}, получить пизды за неиспользование букв!")
+    bot.reply_to(message, text=f"{message.from_user.first_name}, получает пизды за неиспользование букв!")
 
 
 bot.infinity_polling()
