@@ -60,3 +60,10 @@ def get_rating(message: telebot.types.Message, bot: telebot.TeleBot):
     user_id = message.from_user.id
     rating = 0
     bot.reply_to(message, f"Ваш рейтинг: {rating}")
+
+
+def get_baby(message: telebot.types.Message, bot: telebot.TeleBot):
+    get = requests.get(url=constants.PHOTO_STOCK_URL,
+                 headers={'Authorization': 'Client-ID ToxHWN4d9KOUXoPruTzM6-kehXClI0U0KtbCCBkNYBM'})
+    image_url = get.json()['urls']['regular']
+    bot.send_photo(message.chat.id, photo=image_url, caption="#baby")

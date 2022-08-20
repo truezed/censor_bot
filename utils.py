@@ -12,10 +12,11 @@ def extract_arg(arg):
 
 
 def register_handlers(bot: telebot.TeleBot):
-    from handlers import get_rating, text_handler, non_text_message_handler, vote_public_enemy, get_anek
+    from handlers import get_rating, text_handler, non_text_message_handler, vote_public_enemy, get_anek, get_baby
 
     bot.register_message_handler(commands=["anek"], callback=get_anek, pass_bot=True)
     bot.register_message_handler(commands=["rating"], callback=get_rating, pass_bot=True)
     bot.register_message_handler(commands=["votekick"], callback=vote_public_enemy, pass_bot=True)
+    bot.register_message_handler(commands=["baby"], callback=get_baby, pass_bot=True)
     bot.register_message_handler(content_types=["voice"], callback=non_text_message_handler, pass_bot=True)
     bot.register_message_handler(content_types=["text"], callback=text_handler, pass_bot=True)
