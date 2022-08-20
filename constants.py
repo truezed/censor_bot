@@ -26,3 +26,6 @@ ZWANZIG_ANEK = "ночью на дремучем хуторе стук в две
                "\n - это мы, партизаны " \
                "\n- ой, милочки, а сколько вас?" \
                "\n- цвайцех"
+
+
+PHOTO_STOCK_URL='https://api.unsplash.com/photos/random?query=female-model'
